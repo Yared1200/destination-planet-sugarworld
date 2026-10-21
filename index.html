@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Destination: Planet Sugarworld!!</title>
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
-        <link rel
     </head>
     <body>
         <header>
@@ -41,15 +40,56 @@
                     margin: 10px 2px;
                     cursor: pointer;
                 }
+                .progressWrapper {
+                    width: 60%;
+                    max-width: 400px;
+                    background-color: #ffffff;
+                    border: 2px solid #8b006f;
+                    border-radius: 20px;
+                    margin: 20px auto;
+                    overflow: hidden;
+                    display: none;
+                }
+                .progressFill {
+                    width: 0%;
+                    height: 24px;
+                    background-color: #8b006f;
+                    color: #ffffff;
+                    font-size: 14px;
+                    line-height: 24px;
+                    font-weight: bold;
+                    transition: width 0.1s linear;
+                }
             </style>
             <h1>Welcome to "Destination: Planet Sugarworld!!"!</h1>
             <i>A sweet adventure awaits you! This game is basically Pokemon, but set in a sugary world!</i>
             <p>Click that button below to start your adventure! (but you have to select your version first!)</p>
-            <button onclick="window.location.href='/versions/select/index.html'" class="button">Select Version!!</button>
+            <button onclick="createLoadingSequence()" class="button">Select Version!!</button>
             <a class="github" href="https://www.github.com/Yared1200/destination-planet-sugarworld">Check out my Github!</a>
+            <div class="progressWrapper">
+                <div class="progressFill">0%</div>
         </header>
         <footer>
             <p>&copy; 2026 Pink Diamond Entertainment. All rights reserved.</p>
         </footer>
+        <script>
+            function createLoadingSequence() {
+                document.querySelector(".button").style.display = 'none';
+                document.querySelector(".progressWrapper").style.display = 'block';
+                const bar = document.querySelector(".progressFill")
+                let width = 0;
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            window.location.href = "/versions/select/index.html"
+                        }, 300);
+                    } else {
+                        width += 2;
+                        bar.style.width = width + "%"
+                        bar.TextContent = width + "%"
+                    }, 300)
+            }
+        </script>
     </body>
 </html>
